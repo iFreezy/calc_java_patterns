@@ -7,6 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="lombok-plugin-0.16" level="application" />
+    <orderEntry type="library" exported="" name="intellij-patcher-agent-0.16" level="application" />
   </component>
 </module>
-

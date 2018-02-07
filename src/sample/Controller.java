@@ -42,13 +42,21 @@ public class Controller {
     private void processOperator(ActionEvent event) {
         String value = ((Button) event.getSource()).getText();
         if (!"=".equals(value)){
-            if(!model.getOperator().isEmpty()) return;
+            if(!model.getOperator().isEmpty()){
+                if (!output.getText().equals("")) {
+                    output.setText(String.valueOf(calculation(model.getNum1(), Long.parseLong(output.getText()), model.getOperator())));
+                    model.setOperator(value);
+                    model.setNum1(Long.parseLong(output.getText()));
+                    model.setStart(true);
+                }
+                return;
+            }
             model.setOperator(value);
             model.setNum1(Long.parseLong(output.getText()));
             output.setText("");
         }
         else {
-            if(model.getOperator().isEmpty()) return;
+            if(model.getOperator().isEmpty() || output.getText().equals("")) return;
             output.setText(String.valueOf(calculation(model.getNum1(), Long.parseLong(output.getText()), model.getOperator())));
             model.setOperator("");
             model.setStart(true);

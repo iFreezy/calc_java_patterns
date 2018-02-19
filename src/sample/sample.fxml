@@ -50,7 +50,8 @@
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
             <children>
                 <Button mnemonicParsing="false" onAction="#processNum" prefHeight="40.0" prefWidth="85.0" text="0"/>
-                <Button mnemonicParsing="false" onAction="#processOperator" prefHeight="40.0" prefWidth="40.0" text="="/>
+                <Button mnemonicParsing="false" onAction="#processOperator" prefHeight="40.0" prefWidth="40.0"
+                        text="="/>
                 <Button mnemonicParsing="false" onAction="#processOperator" prefHeight="40.0" prefWidth="40.0"
                         text="-"/>
             </children>

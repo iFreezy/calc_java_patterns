@@ -9,19 +9,30 @@ public class Controller {
 
     @FXML
     private Text output;
-    private long num1 = 0;
-    private long num2 = 0;
 
-    private boolean start = true;
-
-    private String operator = "";
     private Model model = new Model();
+
+    public long calculation(long a, long b, String operator) {
+        switch (operator) {
+            case "+":
+                return a + b;
+            case "-":
+                return a - b;
+            case "*":
+                return a * b;
+            case "/":
+                if (b == 0) return 0;
+                return a / b;
+        }
+        System.out.println("Неизвестный оператор " + operator);
+        return 0;
+    }
 
     @FXML
     private void processNum(ActionEvent event) {
-        if (start) {
+        if (model.isStart()) {
             output.setText("");
-            start = false;
+            model.setStart(false);
         }
         String value = ((Button) event.getSource()).getText();
         output.setText(output.getText() + value);
@@ -31,16 +42,24 @@ public class Controller {
     private void processOperator(ActionEvent event) {
         String value = ((Button) event.getSource()).getText();
         if (!"=".equals(value)){
-            if(!operator.isEmpty()) return;
-            operator = value;
-            num1 = Long.parseLong(output.getText());
+            if(!model.getOperator().isEmpty()){
+                if (!output.getText().equals("")) {
+                    output.setText(String.valueOf(calculation(model.getNum1(), Long.parseLong(output.getText()), model.getOperator())));
+                    model.setOperator(value);
+                    model.setNum1(Long.parseLong(output.getText()));
+                    model.setStart(true);
+                }
+                return;
+            }
+            model.setOperator(value);
+            model.setNum1(Long.parseLong(output.getText()));
             output.setText("");
         }
         else {
-            if(operator.isEmpty()) return;
-            output.setText(String.valueOf(model.calculation(num1, Long.parseLong(output.getText()), operator)));
-            operator = "";
-            start = true;
+            if(model.getOperator().isEmpty() || output.getText().equals("")) return;
+            output.setText(String.valueOf(calculation(model.getNum1(), Long.parseLong(output.getText()), model.getOperator())));
+            model.setOperator("");
+            model.setStart(true);
         }
     }
 
